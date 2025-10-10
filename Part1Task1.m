@@ -77,37 +77,72 @@ Hexp_values = [Hexp_A Hexp_B Hexp_C Hexp_D Hexp_E];
 T_0_values = [T_0_A T_0_B T_0_C T_0_D T_0_E];
 
 
-figure();
-hold on;
-scatter(x_values, SS_Temps_A);
-plot(x, f_x_A);
+V = [25 30 25 30 22];
+I = [.24 .29 .237 .285 .203];
+Qdot = V.*I;
+r = 0.0127;
+A = pi*r^2;
+k = [130 130 115 115 16.2];
+H_an = Qdot./(k*A);
 
-figure();
-hold on;
-scatter(x_values, SS_Temps_B);
-plot(x, f_x_B);
 
-figure();
-hold on;
-scatter(x_values, SS_Temps_C);
-plot(x, f_x_C);
 
 figure();
 hold on;
-scatter(x_values, SS_Temps_D);
-plot(x, f_x_D);
+scatter(x_values, SS_Temps_A, 40, 'filled', 'ro');
+plot(x, f_x_A, 'r', 'LineWidth', 1.5);
+plot(x, H_an(1)*x + T_0_A, 'b', 'LineWidth', 1.5)
+title('Steady State Temperatures vs. Rod Location (Aluminum, 25V, 240 mA)');
+xlabel('x (m)');
+ylabel('Temperature (^\circC)');
+legend('Experimental Data', 'Experimental Data Extrapolation', 'Analytical Data Extrapolation', 'Location','best');
+hold off
+exportgraphics(gcf, 'Aluminum_25V_240mA.png', 'Resolution', 300);
 
 figure();
 hold on;
-scatter(x_values, SS_Temps_E);
-plot(x, f_x_E);
+scatter(x_values, SS_Temps_B, 40, 'filled', 'ro');
+plot(x, f_x_B, 'r', 'LineWidth', 1.5);
+plot(x, H_an(2)*x + T_0_B, 'b', 'LineWidth', 1.5)
+title('Steady State Temperatures vs. Rod Location (Aluminum, 30V, 290 mA)');
+xlabel('x (m)');
+ylabel('Temperature (^\circC)');
+legend('Experimental Data', 'Experimental Data Extrapolation', 'Analytical Data Extrapolation', 'Location','best');
+hold off
+exportgraphics(gcf, 'Aluminum_30V_290mA.png', 'Resolution', 300);
 
+figure();
+hold on;
+scatter(x_values, SS_Temps_C, 40, 'filled', 'ro');
+plot(x, f_x_C, 'r', 'LineWidth', 1.5);
+plot(x, H_an(3)*x + T_0_C, 'b', 'LineWidth', 1.5)
+title('Steady State Temperatures vs. Rod Location (Brass, 25V, 237 mA)');
+xlabel('x (m)');
+ylabel('Temperature (^\circC)');
+legend('Experimental Data', 'Experimental Data Extrapolation', 'Analytical Data Extrapolation', 'Location','best');
+hold off
+exportgraphics(gcf, 'Brass_25V_237mA.png', 'Resolution', 300);
 
+figure();
+hold on;
+scatter(x_values, SS_Temps_D, 40, 'filled', 'ro');
+plot(x, f_x_D, 'r', 'LineWidth', 1.5);
+plot(x, H_an(4)*x + T_0_D, 'b', 'LineWidth', 1.5)
+title('Steady State Temperatures vs. Rod Location (Brass, 30V, 285 mA)');
+xlabel('x (m)');
+ylabel('Temperature (^\circC)');
+legend('Experimental Data', 'Experimental Data Extrapolation', 'Analytical Data Extrapolation', 'Location','best');
+hold off
+exportgraphics(gcf, 'Brass_30V_285mA.png', 'Resolution', 300);
 
-
-% figure();
-% hold on;
-% plot(time, CH_Temps_Steel)
-% 
-% xlabel('Time (sec)')
-% ylabel('Temperature (Celcius)')
+figure();
+hold on;
+scatter(x_values, SS_Temps_E, 40, 'filled', 'ro');
+plot(x, f_x_E, 'r', 'LineWidth', 1.5);
+plot(x, H_an(5)*x + T_0_E, 'b', 'LineWidth', 1.5)
+title('Steady State Temperatures vs. Rod Location (Steel, 22V, 203 mA)');
+xlabel('x (m)');
+ylabel('Temperature (^\circC)');
+legend('Experimental Data', 'Experimental Data Extrapolation', 'Analytical Data Extrapolation', 'Location','best');
+hold off
+exportgraphics(gcf, 'Steel_22V_203mA.png', 'Resolution', 300);
