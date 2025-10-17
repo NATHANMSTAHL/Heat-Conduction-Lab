@@ -12,7 +12,7 @@ H = 91.09;            % W/m^2 or as given
 T0 = 17.04;           % °C
 x = 13.585 / 100;    % convert cm to m
 alpha = 130/(2810*960);      % m^2/s (Aluminum 7075-T651)
-L = 0.05;             % rod length [m] (adjust if known)
+L = 0.149225;             % rod length [m] (adjust if known)
 
 % Define lambda_n and b_n
 n_max = 10;
@@ -21,7 +21,11 @@ lambda_n = (2*n - 1) * pi / (2*L);
 
 % Compute b_n using the analytical solution to the integral:
 % ∫ x sin(λx) dx = (sin(λL) - λL*cos(λL)) / λ^2
-b_n = - (2*H./L) .* ((sin(lambda_n*L) - lambda_n*L.*cos(lambda_n*L)) ./ (lambda_n.^2));
+%b_n = - (2*H./L) .* ((sin(lambda_n*L) - lambda_n*L.*cos(lambda_n*L)) ./ (lambda_n.^2));
+
+for n = 1:n_max
+b_n(n) = (8*H*L)/(pi^2) * ((-1.^n)/(2*n-1)^2);
+end
 
 % Define time values
 t_values = [1, 1000]; % seconds
